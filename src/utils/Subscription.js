@@ -3,7 +3,8 @@ import { getBatch } from './batch'
 // encapsulates the subscription logic for connecting a component to the redux store, as
 // well as nesting subscriptions of descendant components, so that we can ensure the
 // ancestor components re-render before descendants
-
+// 订阅逻辑的封装
+// 嵌套订阅
 const CLEARED = null
 const nullListeners = { notify() {} }
 
@@ -15,11 +16,12 @@ function createListenerCollection() {
   let next = []
 
   return {
+    // 订阅清空
     clear() {
       next = CLEARED
       current = CLEARED
     },
-
+    // 发布订阅
     notify() {
       const listeners = (current = next)
       batch(() => {
@@ -28,7 +30,7 @@ function createListenerCollection() {
         }
       })
     },
-
+    
     get() {
       return next
     },
@@ -58,12 +60,12 @@ export default class Subscription {
 
     this.handleChangeWrapper = this.handleChangeWrapper.bind(this)
   }
-
+  //嵌套订阅
   addNestedSub(listener) {
     this.trySubscribe()
     return this.listeners.subscribe(listener)
   }
-
+  //嵌套发布
   notifyNestedSubs() {
     this.listeners.notify()
   }

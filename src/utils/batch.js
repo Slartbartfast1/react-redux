@@ -1,4 +1,5 @@
 // Default to a dummy "batch" implementation that just runs the callback
+// 批处理
 function defaultNoopBatch(callback) {
   callback()
 }

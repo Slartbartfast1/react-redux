@@ -74,7 +74,7 @@ export function createConnect({
       'mapDispatchToProps'
     )
     const initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps')
-
+    // 调用时传入组件
     return connectHOC(selectorFactory, {
       // used in error messages
       methodName: 'connect',
@@ -101,4 +101,4 @@ export function createConnect({
   }
 }
 
-export default createConnect()
+export default createConnect() // 实际export的是connect createConnect() 可以加入更多配置项

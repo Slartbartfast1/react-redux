@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { ReactReduxContext } from './Context'
 import Subscription from '../utils/Subscription'
 
+// Provider实际上是用高阶组件(HOCHigher-order component)包裹App结合react的Context进行状态管理
 class Provider extends Component {
   constructor(props) {
     super(props)
@@ -36,6 +37,7 @@ class Provider extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // 重新订阅
     if (this.props.store !== prevProps.store) {
       this.state.subscription.tryUnsubscribe()
       const subscription = new Subscription(this.props.store)
